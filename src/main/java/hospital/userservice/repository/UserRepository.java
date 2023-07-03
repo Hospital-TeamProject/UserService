@@ -1,4 +1,4 @@
-package hospital.userservice.model.repository;
+package hospital.userservice.repository;
 
 import hospital.userservice.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
