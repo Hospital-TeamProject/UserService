@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -47,18 +48,14 @@ public class User {
     private String username;
     @Column(nullable = false)
     private String password;
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted = false;
-    @Column(name = "password_token", nullable = false)
-    private UUID passwordToken = UUID.randomUUID();
-//    @ManyToOne
-//    @JoinColumn(name = "department_id", referencedColumnName = "id")
-//    private Department department;
-//    @ManyToMany
-//    @JoinTable(
-//            name = "user_permissions",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "permission_id"))
-//    private List<Permission> permissions;
+    @ManyToOne
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    private Department department;
+    @ManyToMany
+    @JoinTable(
+            name = "user_permissions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id"))
+    private List<Permission> permissions;
 
 }
