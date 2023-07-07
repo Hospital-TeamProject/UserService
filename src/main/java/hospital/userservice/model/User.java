@@ -29,7 +29,7 @@ public class User {
     @Column(nullable = false)
     private String gender;
     @Column(nullable = false)
-    private String JMBG;
+    private String jmbg;
     @Column(name = "residential_address", nullable = false)
     private String residentialAddress;
     @Column(name = "place_of_living", nullable = false)
