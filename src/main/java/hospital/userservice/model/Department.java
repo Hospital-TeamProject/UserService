@@ -14,7 +14,7 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true, nullable = false)
-    private UUID pbo;
+    private UUID departmentCode;
     @Column(nullable = false)
     private String name;
     @ManyToOne
