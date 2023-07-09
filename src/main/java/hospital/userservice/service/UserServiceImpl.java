@@ -1,5 +1,7 @@
 package hospital.userservice.service;
 
+import hospital.userservice.dto.request.CreateUserRequest;
+import hospital.userservice.dto.response.UserResponse;
 import hospital.userservice.model.User;
 import hospital.userservice.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -12,7 +14,8 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
 
     @Override
-    public User createUser(User user) {
+    public UserResponse createUser(CreateUserRequest user) {
+
         return userRepository.save(user);
     }
 }
