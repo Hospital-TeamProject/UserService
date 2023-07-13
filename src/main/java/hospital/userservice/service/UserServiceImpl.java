@@ -2,20 +2,44 @@ package hospital.userservice.service;
 
 import hospital.userservice.dto.request.CreateUserRequest;
 import hospital.userservice.dto.response.UserResponse;
+import hospital.userservice.exception.NotFoundException;
+import hospital.userservice.mapper.UserMapper;
+import hospital.userservice.model.Department;
+import hospital.userservice.model.Permission;
 import hospital.userservice.model.User;
+import hospital.userservice.repository.DepartmentRepository;
+import hospital.userservice.repository.PermissionRepository;
 import hospital.userservice.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
+    private final DepartmentRepository departmentRepository;
+    private final PermissionRepository permissionRepository;
+    private final UserMapper userMapper;
 
     @Override
-    public UserResponse createUser(CreateUserRequest user) {
+    public UserResponse createUser(CreateUserRequest createUserRequest) {
 
-        return userRepository.save(user);
+        System.out.println(createUserRequest.getDepartmentId());
+        Department department = departmentRepository.findById(createUserRequest.getDepartmentId())
+                .orElseThrow(() -> {
+                        throw new NotFoundException("Department with given id doesn't exist");
+                    }
+                );
+
+        List<Permission> permissions = permissionRepository.findPermissionsByNameIsIn(Arrays.asList(createUserRequest.getPermissions()));
+
+        User user = userRepository.save(userMapper.requestToModel(createUserRequest,department,permissions));
+
+        return userMapper.modelToResponse(user);
     }
 }
