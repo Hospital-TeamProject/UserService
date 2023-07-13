@@ -19,7 +19,7 @@ import java.util.UUID;
 public class UserResponse {
 
     private Long id;
-    private UUID lbz = UUID.randomUUID();
+    private UUID employeeId = UUID.randomUUID();
     private String firstName;
     private String lastName;
     private Date dateOfBirth;

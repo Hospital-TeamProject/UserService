@@ -28,15 +28,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserResponse createUser(CreateUserRequest createUserRequest) {
-
-        System.out.println(createUserRequest.getDepartmentId());
         Department department = departmentRepository.findById(createUserRequest.getDepartmentId())
                 .orElseThrow(() -> {
                         throw new NotFoundException("Department with given id doesn't exist");
                     }
                 );
 
-        List<Permission> permissions = permissionRepository.findPermissionsByNameIsIn(Arrays.asList(createUserRequest.getPermissions()));
+        List<Permission> permissions = permissionRepository.checkIfPermissionsExist(Arrays.asList(createUserRequest.getPermissions()));
 
         User user = userRepository.save(userMapper.requestToModel(createUserRequest,department,permissions));
 

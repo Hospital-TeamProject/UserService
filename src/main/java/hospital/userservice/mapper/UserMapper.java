@@ -49,7 +49,7 @@ public class UserMapper {
     public UserResponse modelToResponse(User user) {
         UserResponse userResponse = new UserResponse();
         userResponse.setId(user.getId());
-        userResponse.setLbz(user.getLbz());
+        userResponse.setEmployeeId(user.getEmployeeId());
         userResponse.setFirstName(user.getFirstName());
         userResponse.setLastName(user.getLastName());
         userResponse.setDateOfBirth(user.getDateOfBirth());
