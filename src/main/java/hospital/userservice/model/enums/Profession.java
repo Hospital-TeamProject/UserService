@@ -21,5 +21,16 @@ public enum Profession {
         this.notation = notation;
     }
 
+    public String getNotation() {
+        return notation;
+    }
 
+    public static Profession ValueOfNotation(String notation) {
+        for (Profession t : values()) {
+            if (t.notation.equals(notation)) {
+                return t;
+            }
+        }
+        return null;
+    }
 }
