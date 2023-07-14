@@ -6,10 +6,9 @@ import hospital.userservice.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -21,5 +20,10 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody CreateUserRequest user) {
         return ResponseEntity.ok(userService.createUser(user));
+    }
+
+    @GetMapping("/{employeeId}")
+    public ResponseEntity<UserResponse> getUserByEmployeeId(@PathVariable UUID employeeId) {
+        return ResponseEntity.ok(userService.getUserByEmployeeId(employeeId));
     }
 }

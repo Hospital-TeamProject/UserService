@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -37,6 +38,15 @@ public class UserServiceImpl implements UserService{
         List<Permission> permissions = permissionRepository.checkIfPermissionsExist(Arrays.asList(createUserRequest.getPermissions()));
 
         User user = userRepository.save(userMapper.requestToModel(createUserRequest,department,permissions));
+
+        return userMapper.modelToResponse(user);
+    }
+
+    @Override
+    public UserResponse getUserByEmployeeId(UUID employeeId) {
+        User user = userRepository.findUserByEmployeeId(employeeId).orElseThrow(() -> {
+            throw new NotFoundException(String.format("User with employeeId {} doesn't exist.",employeeId));
+        });
 
         return userMapper.modelToResponse(user);
     }
