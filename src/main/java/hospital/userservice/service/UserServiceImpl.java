@@ -1,6 +1,7 @@
 package hospital.userservice.service;
 
 import hospital.userservice.dto.request.CreateUserRequest;
+import hospital.userservice.dto.request.UpdateUserRequest;
 import hospital.userservice.dto.response.UserResponse;
 import hospital.userservice.exception.NotFoundException;
 import hospital.userservice.mapper.UserMapper;
@@ -12,6 +13,7 @@ import hospital.userservice.repository.PermissionRepository;
 import hospital.userservice.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +30,7 @@ public class UserServiceImpl implements UserService{
     private final UserMapper userMapper;
 
     @Override
+    @Transactional
     public UserResponse createUser(CreateUserRequest createUserRequest) {
         Department department = departmentRepository.findById(createUserRequest.getDepartmentId())
                 .orElseThrow(() -> {
@@ -50,4 +53,23 @@ public class UserServiceImpl implements UserService{
 
         return userMapper.modelToResponse(user);
     }
+
+    @Override
+    public UserResponse deleteUser(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("User with given id doesn't exist.");
+        });
+
+        user.setDeleted(true);
+        userRepository.save(user);
+
+        return userMapper.modelToResponse(user);
+    }
+
+//    @Override
+//    public UserResponse updateUser(UUID employeeId, UpdateUserRequest updateUserRequest) {
+//
+//    }
+
+
 }

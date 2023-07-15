@@ -48,6 +48,8 @@ public class User {
     private String username;
     @Column(nullable = false)
     private String password;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted = false;
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;

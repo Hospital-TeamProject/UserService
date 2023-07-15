@@ -1,6 +1,7 @@
 package hospital.userservice.controller;
 
 import hospital.userservice.dto.request.CreateUserRequest;
+import hospital.userservice.dto.request.UpdateUserRequest;
 import hospital.userservice.dto.response.UserResponse;
 import hospital.userservice.service.UserService;
 import jakarta.validation.Valid;
@@ -26,4 +27,15 @@ public class UserController {
     public ResponseEntity<UserResponse> getUserByEmployeeId(@PathVariable UUID employeeId) {
         return ResponseEntity.ok(userService.getUserByEmployeeId(employeeId));
     }
+
+//    @PutMapping("/{employeeId}")
+//    public ResponseEntity<UserResponse> updateUser(@PathVariable UUID employeeId, @Valid UpdateUserRequest updateUserRequest) {
+//        return ResponseEntity.ok(userService.updateUser(employeeId,updateUserRequest));
+//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UserResponse> deleteUser(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.deleteUser(id));
+    }
+
 }

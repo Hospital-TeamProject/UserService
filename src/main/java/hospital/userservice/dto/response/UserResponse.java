@@ -32,6 +32,7 @@ public class UserResponse {
     private Title title;
     private Profession profession;
     private String username;
+    private boolean isDeleted;
     private Department department;
     private List<String> permissions;
 }

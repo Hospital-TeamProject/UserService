@@ -62,6 +62,7 @@ public class UserMapper {
         userResponse.setTitle(user.getTitle());
         userResponse.setProfession(user.getProfession());
         userResponse.setUsername(user.getUsername());
+        userResponse.setDeleted(user.isDeleted());
         userResponse.setDepartment(user.getDepartment());
         userResponse.setPermissions(user.getPermissions().stream().map(Permission::getName).collect(Collectors.toList()));
 
