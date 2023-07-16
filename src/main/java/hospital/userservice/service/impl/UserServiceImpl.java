@@ -1,4 +1,4 @@
-package hospital.userservice.service;
+package hospital.userservice.service.impl;
 
 import hospital.userservice.dto.request.CreateUserRequest;
 import hospital.userservice.dto.request.UpdateUserRequest;
@@ -11,6 +11,7 @@ import hospital.userservice.model.User;
 import hospital.userservice.repository.DepartmentRepository;
 import hospital.userservice.repository.PermissionRepository;
 import hospital.userservice.repository.UserRepository;
+import hospital.userservice.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final DepartmentRepository departmentRepository;
