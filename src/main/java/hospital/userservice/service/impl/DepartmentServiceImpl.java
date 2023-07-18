@@ -3,6 +3,7 @@ package hospital.userservice.service.impl;
 import hospital.userservice.dto.response.DepartmentResponse;
 import hospital.userservice.exception.NotFoundException;
 import hospital.userservice.mapper.DepartmentMapper;
+import hospital.userservice.model.Department;
 import hospital.userservice.model.Hospital;
 import hospital.userservice.repository.DepartmentRepository;
 import hospital.userservice.repository.HospitalRepository;
@@ -32,5 +33,30 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .map(departmentMapper::modelToDepartmentResponse)
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public List<DepartmentResponse> getAllDepartments() {
+        return departmentRepository.findAll()
+                .stream()
+                .map(departmentMapper::modelToDepartmentResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DepartmentResponse> getDepartmentsByName(String name) {
+        return departmentRepository.findDepartmentsByName(name)
+                .stream()
+                .map(departmentMapper::modelToDepartmentResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public DepartmentResponse getDepartmentByDepartmentCode(UUID departmentCode) {
+        Department department = departmentRepository.findDepartmentByDepartmentCode(departmentCode).orElseThrow(() -> {
+           throw new NotFoundException("Department with give department code doesn't exist.");
+        });
+
+        return departmentMapper.modelToDepartmentResponse(department);
     }
 }

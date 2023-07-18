@@ -17,8 +17,23 @@ import java.util.UUID;
 @RequestMapping("/departments")
 public class DepartmentController {
     private final DepartmentService departmentService;
-    @GetMapping("/{hospitalId}")
-    public ResponseEntity<List<DepartmentResponse>> getDepartmentsByHospital(@PathVariable UUID hospitalId) {
-        return ResponseEntity.ok(departmentService.getDepartmentsByHospital(hospitalId));
+    @GetMapping("/{hospitalCode}")
+    public ResponseEntity<List<DepartmentResponse>> getDepartmentsByHospital(@PathVariable UUID hospitalCode) {
+        return ResponseEntity.ok(departmentService.getDepartmentsByHospital(hospitalCode));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DepartmentResponse>> getAllDepartments() {
+        return ResponseEntity.ok(departmentService.getAllDepartments());
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<DepartmentResponse>> getDepartmentsByName(@PathVariable String name) {
+        return ResponseEntity.ok(departmentService.getDepartmentsByName(name));
+    }
+
+    @GetMapping("/departmentCode/{departmentCode}")
+    public ResponseEntity<DepartmentResponse> getDepartmentByDepartmentCode(@PathVariable UUID departmentCode) {
+        return ResponseEntity.ok(departmentService.getDepartmentByDepartmentCode(departmentCode));
     }
 }
