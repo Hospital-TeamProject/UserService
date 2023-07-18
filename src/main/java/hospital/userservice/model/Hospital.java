@@ -14,7 +14,7 @@ public class Hospital {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true, nullable = false)
-    private UUID pbb;
+    private UUID hospitalCode;
     @Column(nullable = false)
     private String fullName;
     @Column(nullable = false)
